@@ -240,15 +240,6 @@ Abstract and references: the abstract mentions the catches, and the references n
 
 Flight 15 hasn’t happened yet. The date and its regulatory approval weren’t final as of today’s reports, so the page says “targeted for November 2026”. Check the Flight 15 sentences again before you submit, since they may be out of date by then.
 
-Index
-Code·HTML 
-
-can you please fix the code and make it one with one header
-
-Clarifying what counts as a single header section.
-
-I took “one header” to mean a single <head> section, so I merged the three separate <style> blocks into one and moved the meta and link tags to the top of the head. Everything else is unchanged:
-
 html
 <!DOCTYPE html>
 <html>
@@ -259,7 +250,6 @@ html
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
   <style>
-    /* make all writing bold (delete this rule if you want normal weight) */
     body, h1, h2, p, td, th {
       font-weight: bold;
     }
@@ -316,62 +306,7 @@ html
     </tr>
   </table>
   </p>
-
-  <hr>
-
-  <!-- abstract -->
-  <p class="ex1">
-  <pre>
-  This paper reviews the evolution of Starship, SpaceX's fully reusable super heavy-lift launch system,
-  from its early concept to the integrated flight test programme. The development approach is
-  characterised by rapid hardware iteration, with vehicles built, flown and modified in short cycles,
-  compared with the longer design-then-build approach used in many traditional launch programmes.
-  We further consider the tower catches of the Super Heavy booster achieved since October 2024 and the
-  planned first tower catch of the Starship upper stage, and discuss their role in reducing launch costs
-  compared with expendable launch vehicles. Our results show that...We conclude that...
-  </pre>
-  <hr>
-  <h3 id="Abstract">Abstract</h3>
-  </p>
-
-  <!-- introduction -->
-  <p class="ex1">
-  <pre>
-  Starship (SpaceX, 2024) is a two-stage launch system made up of the Super Heavy booster and the
-  Starship upper stage, both built from stainless steel and powered by Raptor engines that burn liquid
-  methane and liquid oxygen. The system is designed to be fully and rapidly reusable, with the long-term
-  aim of carrying crew and cargo to Earth orbit, the Moon and Mars. In 2021 NASA selected a Starship
-  variant as the Human Landing System for the Artemis programme (NASA, 2024), which gave the vehicle
-  a role in lunar exploration as well as in commercial launch. Unlike many earlier programmes,
-  development has been carried out through repeated integrated flight tests, in which each flight
-  provides data that is used to modify the next vehicle. The progress of these tests is discussed in
-  the next section.
-  </pre>
-  <hr>
-  <h3 id="Introduction">Introduction</h3>
-  </p>
-
-  <!-- analysis and discussion -->
-  <hr>
-  <h3 id="Analysis-and-discussion">Analysis and discussion</h3>
-  <p>
-  Starship development progress is the subject of much public documentation such as
-  <a href="https://www.spacex.com/vehicles/starship/">SpaceX (2024).</a>
-  The key reusability milestone came on Flight 5 on 13 October 2024, when the Super Heavy booster
-  returned to the launch site and was caught by the tower's "chopstick" arms, the first catch of an
-  orbital-class booster
-  (<a href="https://www.space.com/spacex-starship-flight-5-launch-super-heavy-booster-catch-success-video">Space.com, 2024</a>).
-  On Flight 6 the catch was aborted after a tower health check failed, so the booster splashed down in the
-  Gulf of Mexico instead. The catch was then repeated on Flight 7 (January 2025) and Flight 8 (March 2025),
-  giving three successful booster catches in four attempts
-  (<a href="https://nextspaceflight.com/starship/">Next Spaceflight, 2026</a>).
-  The programme later moved to the third-generation "V3" vehicle, first flown on Flight 12 in May 2026.
-  Flight 14 on 28 September 2026 was the first Starship flight to reach orbit, deploying 26 Starlink V3
-  satellites while the V3 booster made a soft splashdown
-  (<a href="https://www.cnbc.com/2026/09/28/spacex-prepares-to-send-starship-rocket-to-orbit-for-first-time.html">CNBC, 2026</a>).
-  </p>
-
-  <p>
+<p>
   Table 1: Super Heavy booster outcomes on selected Starship integrated flight tests
   </p>
 
@@ -417,63 +352,5 @@ html
       <td>Soft splashdown</td>
     </tr>
   </table>
-
-  <p>
-  The upper stage, called Ship, has never been caught. It returns from orbit much faster than the booster,
-  and every Ship so far has ended its flight with an ocean splashdown. SpaceX has announced that Flight 15,
-  targeted for November 2026, will attempt to catch both the Super Heavy booster and Ship 42 with the
-  tower arms at Starbase, which would be the first full recovery of an orbital launch vehicle
-  (<a href="https://www.engadget.com/2292685/heres-how-spacex-plans-to-catch-starships-upper-stage-for-the-first-time/">Engadget, 2026</a>).
-  Ship 42 has already been lifted into a simulated catch position on the tower, and SpaceX has described
-  success as more likely than not, although the exact date and regulatory approval were still being
-  finalised at the time of writing. If the attempt works, the next goals are to fly a recovered Ship a
-  second time and to complete an in-orbit propellant transfer demonstration, both planned for early 2027
-  (<a href="https://northeasttimes.com/2026/10/21/spacex-plans-to-catch-both-starship-stages-on-its-next-flight/">Northeast Times, 2026</a>).
-  </p>
-
-  <p>
-  Formatting some equations using MathML. The rocket equation links the change in velocity of a vehicle
-  to its exhaust velocity and the ratio of its initial and final mass:
-  <math xmlns="http://www.w3.org/1998/Math/MathML">
-    <mrow>
-      <mi>&#916;</mi><mi>v</mi>
-      <mo>=</mo>
-      <msub><mi>v</mi><mi>e</mi></msub>
-      <mo>&InvisibleTimes;</mo>
-      <mi>ln</mi>
-      <mo>&ApplyFunction;</mo>
-      <mfrac>
-        <msub><mi>m</mi><mn>0</mn></msub>
-        <msub><mi>m</mi><mi>f</mi></msub>
-      </mfrac>
-    </mrow>
-  </math>
-  </p>
-
-  <hr>
-
-  <!-- references -->
-  <h3 id="References">References</h3>
-  <p>
-  <pre>
-  CNBC (2026), SpaceX launches its massive Starship rocket into orbit for the first time.
-  Available at: https://www.cnbc.com/2026/09/28/spacex-prepares-to-send-starship-rocket-to-orbit-for-first-time.html
-
-  Engadget (2026), Here's how SpaceX plans to catch Starship's upper stage for the first time.
-  Available at: https://www.engadget.com/2292685/heres-how-spacex-plans-to-catch-starships-upper-stage-for-the-first-time/
-
-  NASA (2024), Artemis programme. Available at: https://www.nasa.gov/humans-in-space/artemis/
-
-  Next Spaceflight (2026), Starship. Available at: https://nextspaceflight.com/starship/
-
-  Northeast Times (2026), SpaceX Plans to Catch Both Starship Stages on Its Next Flight.
-  Available at: https://northeasttimes.com/2026/10/21/spacex-plans-to-catch-both-starship-stages-on-its-next-flight/
-
-  Space.com (2024), SpaceX catches giant Starship booster with 'Chopsticks' on historic Flight 5 rocket launch and landing.
-  Available at: https://www.space.com/spacex-starship-flight-5-launch-super-heavy-booster-catch-success-video
-
-  SpaceX (2024), Starship. Available at: https://www.spacex.com/vehicles/starship/
-  </pre>
-  </p>
-</body>
+  
 </html>
