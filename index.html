@@ -306,31 +306,35 @@
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Month');
       data.addColumn('number', 'Sales (in GBP)');
+      data.addColumn({ type: 'string', role: 'style' });   // colour of each column
       data.addRows([
-        ['January', 25000], ['February', 28000], ['March', 32000],
-        ['April', 27000],   ['May', 31000],      ['June', 34000],
-        ['July', 38000],    ['August', 36000],   ['September', 31000],
-        ['October', 29000], ['November', 27000], ['December', 32000]
+        ['January',   25000, 'color: #3366cc'],
+        ['February',  28000, 'color: #dc3912'],
+        ['March',     32000, 'color: #ff9900'],
+        ['April',     27000, 'color: #109618'],
+        ['May',       31000, 'color: #990099'],
+        ['June',      34000, 'color: #0099c6'],
+        ['July',      38000, 'color: #dd4477'],
+        ['August',    36000, 'color: #66aa00'],
+        ['September', 31000, 'color: #b82e2e'],
+        ['October',   29000, 'color: #316395'],
+        ['November',  27000, 'color: #994499'],
+        ['December',  32000, 'color: #22aa99']
       ]);
+
       var options = {
         title: 'Monthly Sales in 2023',
         hAxis: { title: 'Month' },
         vAxis: { title: 'Sales (in GBP)', minValue: 0 },
-        colors: ['#3366cc', '#dc3912', '#ff9900', '#109618', '#990099', '#0099c6',
-                 '#dd4477', '#66aa00', '#b82e2e', '#316395', '#994499', '#22aa99'],
-        legend: { position: 'none' },
-        animation: { startup: true, duration: 1000, easing: 'out' }
+        legend: { position: 'none' }
       };
-      var chart = new google.visualization.ColumnChart(document.getElementById('column_div'));
-      var view = new google.visualization.DataView(data);
-      view.setColumns([0, 1, {
-        calc: function (dt, row) { return options.colors[row]; },
-        type: 'string',
-        role: 'style'
-      }]);
-      chart.draw(view, options);
+
+      new google.visualization.ColumnChart(document.getElementById('column_div')).draw(data, options);
     }
   </script>
+
+  <hr>
+
   <!-- references -->
   <h3 id="References">References</h3>
   <p>
