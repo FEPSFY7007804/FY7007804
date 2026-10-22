@@ -2,131 +2,6 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ENG0018 Computer Laboratory 2026/27</title>
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
-  <!-- style for tables -->
-  <style>
-    table {
-      font-family: arial, sans-serif;
-      border-collapse: collapse;
-      width: 30%;
-    }
-
-    td, th {
-      border: 1px solid #dddddd;
-      text-align: left;
-      padding: 8px;
-    }
-
-    tr:nth-child(even) {
-      background-color: #dddddd;
-    }
-
-    p.exl {
-      margin-left: 250px;
-    }
-
-    .mySlides {
-      display: none;
-    }
-  </style>
-</head>
-
-<body style="background-color:#FFFFFF; margin-left:50px;">
-  <img src="WebBanner2026.png" alt="Banner" width="900" height="300">
-
-  <h1><b>ENG0018 COMPUTER Laboratory 2026/27</b></h1>
-  <h2>Student URN: 7007804</h2>
-  <hr>
-  <h2 style="font-family:calibri;"><b>Conference paper: Evolution of Starship (SpaceX)</b></h2>
-  <hr>
-</body>
-</html>
-
-What was wrong
-
-Wrong structure: <body> was opened before <head>, and </head> appeared twice. The order should be <html>, then <head>…</head>, then <body>…</body>, then </html>.
-Image in <head>: the <img> banner must go inside <body>, or it won’t display properly.
-Missing =: width"900" height"300" should be width="900" height="300".
-Bad comment: <!style for tables> isn’t valid. Comments are written <!-- like this -->.
-CSS typos: boarder-collapse: collapse should be border-collapse: collapse;, and the semicolon was missing too.
-Content outside <head>: the <meta viewport>, <link> and extra <style> tags sat after </head>. They now live in <head>, and I merged the three <style> blocks into one.
-Missing </body>: the body was never closed.
-
-I also added <meta charset> and a <title>, which every page should have. Your .exl and .mySlides styles are kept, but nothing in the code uses them yet. If you have a table or slides to add, put them inside <body>.
-
-make the writing bold
-
-Making all page text bold via styling.
-
-I added a CSS rule that makes all the text bold, including the Student URN line.
-
-html
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ENG0018 Computer Laboratory 2026/27</title>
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
-  <!-- style for tables -->
-  <style>
-    /* make all writing bold */
-    body, h1, h2, p, td, th {
-      font-weight: bold;
-    }
-
-    table {
-      font-family: arial, sans-serif;
-      border-collapse: collapse;
-      width: 30%;
-    }
-
-    td, th {
-      border: 1px solid #dddddd;
-      text-align: left;
-      padding: 8px;
-    }
-
-    tr:nth-child(even) {
-      background-color: #dddddd;
-    }
-
-    p.exl {
-      margin-left: 250px;
-    }
-
-    .mySlides {
-      display: none;
-    }
-  </style>
-</head>
-
-<body style="background-color:#FFFFFF; margin-left:50px;">
-  <img src="WebBanner2026.png" alt="Banner" width="900" height="300">
-
-  <h1>ENG0018 COMPUTER Laboratory 2026/27</h1>
-  <h2>Student URN: 7007804</h2>
-  <hr>
-  <h2 style="font-family:calibri;">Conference paper: Evolution of Starship (SpaceX)</h2>
-  <hr>
-</body>
-</html>
-
-The w3.css stylesheet you link to sets headings to normal weight, which is why only the text wrapped in <b> looked bold before. The new rule overrides that, so I removed the <b> tags because they’re no longer needed.
-
-If you only wanted certain lines bold, tell me which ones and I’ll limit it to those.
-
-Here’s the full code to paste into your GitHub editor:
-
-html
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
   <title>ENG0018 Computer Laboratory 2026/27</title>
 
   <!-- style for tables -->
@@ -204,8 +79,9 @@ html
   from its early concept to the integrated flight test programme. The development approach is
   characterised by rapid hardware iteration, with vehicles built, flown and modified in short cycles,
   compared with the longer design-then-build approach used in many traditional launch programmes.
-  We further consider the role of full reusability and of booster recovery in reducing launch costs,
-  and compare these goals with expendable launch vehicles. Our results show that...We conclude that...
+  We further consider the tower catches of the Super Heavy booster achieved since October 2024 and the
+  planned first tower catch of the Starship upper stage, and discuss their role in reducing launch costs
+  compared with expendable launch vehicles. Our results show that...We conclude that...
   </pre>
   <hr>
   <h3 id="Abstract">Abstract</h3>
@@ -234,35 +110,79 @@ html
   <p>
   Starship development progress is the subject of much public documentation such as
   <a href="https://www.spacex.com/vehicles/starship/">SpaceX (2024).</a>
-  Table 1: Data on early Starship integrated flight tests
+  The key reusability milestone came on Flight 5 on 13 October 2024, when the Super Heavy booster
+  returned to the launch site and was caught by the tower's "chopstick" arms, the first catch of an
+  orbital-class booster
+  (<a href="https://www.space.com/spacex-starship-flight-5-launch-super-heavy-booster-catch-success-video">Space.com, 2024</a>).
+  On Flight 6 the catch was aborted after a tower health check failed, so the booster splashed down in the
+  Gulf of Mexico instead. The catch was then repeated on Flight 7 (January 2025) and Flight 8 (March 2025),
+  giving three successful booster catches in four attempts
+  (<a href="https://nextspaceflight.com/starship/">Next Spaceflight, 2026</a>).
+  The programme later moved to the third-generation "V3" vehicle, first flown on Flight 12 in May 2026.
+  Flight 14 on 28 September 2026 was the first Starship flight to reach orbit, deploying 26 Starlink V3
+  satellites while the V3 booster made a soft splashdown
+  (<a href="https://www.cnbc.com/2026/09/28/spacex-prepares-to-send-starship-rocket-to-orbit-for-first-time.html">CNBC, 2026</a>).
+  </p>
+
+  <p>
+  Table 1: Super Heavy booster outcomes on selected Starship integrated flight tests
   </p>
 
   <table>
     <tr>
       <th>Integrated flight test</th>
       <th>Date</th>
-    </tr>
-    <tr>
-      <td>Flight 1</td>
-      <td>April 2023</td>
-    </tr>
-    <tr>
-      <td>Flight 2</td>
-      <td>November 2023</td>
-    </tr>
-    <tr>
-      <td>Flight 3</td>
-      <td>March 2024</td>
-    </tr>
-    <tr>
-      <td>Flight 4</td>
-      <td>June 2024</td>
+      <th>Booster outcome</th>
     </tr>
     <tr>
       <td>Flight 5</td>
-      <td>October 2024</td>
+      <td>13 Oct 2024</td>
+      <td>Caught by tower (first catch)</td>
+    </tr>
+    <tr>
+      <td>Flight 6</td>
+      <td>19 Nov 2024</td>
+      <td>Catch aborted, Gulf splashdown</td>
+    </tr>
+    <tr>
+      <td>Flight 7</td>
+      <td>16 Jan 2025</td>
+      <td>Caught by tower</td>
+    </tr>
+    <tr>
+      <td>Flight 8</td>
+      <td>6 Mar 2025</td>
+      <td>Caught by tower</td>
+    </tr>
+    <tr>
+      <td>Flight 12</td>
+      <td>22 May 2026</td>
+      <td>Hard Gulf splashdown (first V3)</td>
+    </tr>
+    <tr>
+      <td>Flight 13</td>
+      <td>24 Jul 2026</td>
+      <td>Hard Gulf splashdown</td>
+    </tr>
+    <tr>
+      <td>Flight 14</td>
+      <td>28 Sep 2026</td>
+      <td>Soft splashdown</td>
     </tr>
   </table>
+
+  <p>
+  The upper stage, called Ship, has never been caught. It returns from orbit much faster than the booster,
+  and every Ship so far has ended its flight with an ocean splashdown. SpaceX has announced that Flight 15,
+  targeted for November 2026, will attempt to catch both the Super Heavy booster and Ship 42 with the
+  tower arms at Starbase, which would be the first full recovery of an orbital launch vehicle
+  (<a href="https://www.engadget.com/2292685/heres-how-spacex-plans-to-catch-starships-upper-stage-for-the-first-time/">Engadget, 2026</a>).
+  Ship 42 has already been lifted into a simulated catch position on the tower, and SpaceX has described
+  success as more likely than not, although the exact date and regulatory approval were still being
+  finalised at the time of writing. If the attempt works, the next goals are to fly a recovered Ship a
+  second time and to complete an in-orbit propellant transfer demonstration, both planned for early 2027
+  (<a href="https://northeasttimes.com/2026/10/21/spacex-plans-to-catch-both-starship-stages-on-its-next-flight/">Northeast Times, 2026</a>).
+  </p>
 
   <p>
   Formatting some equations using MathML. The rocket equation links the change in velocity of a vehicle
@@ -289,7 +209,21 @@ html
   <h3 id="References">References</h3>
   <p>
   <pre>
+  CNBC (2026), SpaceX launches its massive Starship rocket into orbit for the first time.
+  Available at: https://www.cnbc.com/2026/09/28/spacex-prepares-to-send-starship-rocket-to-orbit-for-first-time.html
+
+  Engadget (2026), Here's how SpaceX plans to catch Starship's upper stage for the first time.
+  Available at: https://www.engadget.com/2292685/heres-how-spacex-plans-to-catch-starships-upper-stage-for-the-first-time/
+
   NASA (2024), Artemis programme. Available at: https://www.nasa.gov/humans-in-space/artemis/
+
+  Next Spaceflight (2026), Starship. Available at: https://nextspaceflight.com/starship/
+
+  Northeast Times (2026), SpaceX Plans to Catch Both Starship Stages on Its Next Flight.
+  Available at: https://northeasttimes.com/2026/10/21/spacex-plans-to-catch-both-starship-stages-on-its-next-flight/
+
+  Space.com (2024), SpaceX catches giant Starship booster with 'Chopsticks' on historic Flight 5 rocket launch and landing.
+  Available at: https://www.space.com/spacex-starship-flight-5-launch-super-heavy-booster-catch-success-video
 
   SpaceX (2024), Starship. Available at: https://www.spacex.com/vehicles/starship/
   </pre>
@@ -297,26 +231,40 @@ html
 </body>
 </html>
 
-Copy the whole block, replace everything in your editor with it, then commit the changes.
+What changed
 
-talk about the more recent flights when they caught the booster and the future plnas of catching the actual upper stage
+Booster catches: the Analysis section now covers the first catch on Flight 5, the aborted catch on Flight 6, and repeat catches on Flights 7 and 8. It then covers the move to the V3 vehicle and Flight 14, the first Starship flight to reach orbit.
+Upper stage plans: it covers the plan to catch both stages on Flight 15, targeted for November 2026, and the follow-on goals of reflying a Ship and an in-orbit propellant transfer test in early 2027.
+Table 1: it now shows booster outcomes across selected flights. I left out Flights 9 to 11 because I couldn’t confirm their details, so it says “selected”.
+Abstract and references: the abstract mentions the catches, and the references now include the sources above, each linked in the text as the worksheet asks.
 
-I’ve added the booster catches and the plan to catch the upper stage. Here’s the full updated code to paste into your GitHub editor:
+Flight 15 hasn’t happened yet. The date and its regulatory approval weren’t final as of today’s reports, so the page says “targeted for November 2026”. Check the Flight 15 sentences again before you submit, since they may be out of date by then.
+
+Index
+Code·HTML 
+
+can you please fix the code and make it one with one header
+
+Clarifying what counts as a single header section.
+
+I took “one header” to mean a single <head> section, so I merged the three separate <style> blocks into one and moved the meta and link tags to the top of the head. Everything else is unchanged:
 
 html
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ENG0018 Computer Laboratory 2026/27</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-  <!-- style for tables -->
   <style>
-    /* make all writing bold (delete this block if you want normal weight) */
+    /* make all writing bold (delete this rule if you want normal weight) */
     body, h1, h2, p, td, th {
       font-weight: bold;
     }
 
+    /* style for tables */
     table {
       font-family: arial, sans-serif;
       border-collapse: collapse;
@@ -332,18 +280,16 @@ html
     tr:nth-child(even) {
       background-color: #dddddd;
     }
-  </style>
 
-  <style>
+    /* indented paragraph */
     p.ex1 {
       margin-left: 250px;
     }
-  </style>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <style>
-    .mySlides {display: none;}
+    /* hidden slides (used in a later worksheet) */
+    .mySlides {
+      display: none;
+    }
   </style>
 </head>
 
