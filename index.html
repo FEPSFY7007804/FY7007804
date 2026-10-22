@@ -302,39 +302,40 @@
       new google.visualization.LineChart(document.getElementById('line_div')).draw(data, options);
     }
 
-    function drawColumnChart() {
+  function drawColumnChart() {
+      var months = ['January', 'February', 'March', 'April', 'May', 'June',
+                    'July', 'August', 'September', 'October', 'November', 'December'];
+      var sales  = [25000, 28000, 32000, 27000, 31000, 34000,
+                    38000, 36000, 31000, 29000, 27000, 32000];
+      var colours = ['#3366cc', '#dc3912', '#ff9900', '#109618', '#990099', '#0099c6',
+                     '#dd4477', '#66aa00', '#b82e2e', '#316395', '#994499', '#22aa99'];
+
+      // One series per month, each with a value only in its own row,
+      // so every column gets its own colour.
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Month');
-      data.addColumn('number', 'Sales (in GBP)');
-      data.addColumn({ type: 'string', role: 'style' });   // colour of each column
-      data.addRows([
-        ['January',   25000, 'color: #3366cc'],
-        ['February',  28000, 'color: #dc3912'],
-        ['March',     32000, 'color: #ff9900'],
-        ['April',     27000, 'color: #109618'],
-        ['May',       31000, 'color: #990099'],
-        ['June',      34000, 'color: #0099c6'],
-        ['July',      38000, 'color: #dd4477'],
-        ['August',    36000, 'color: #66aa00'],
-        ['September', 31000, 'color: #b82e2e'],
-        ['October',   29000, 'color: #316395'],
-        ['November',  27000, 'color: #994499'],
-        ['December',  32000, 'color: #22aa99']
-      ]);
+      for (var i = 0; i < months.length; i++) {
+        data.addColumn('number', months[i]);
+      }
+      for (var r = 0; r < months.length; r++) {
+        var row = [months[r]];
+        for (var c = 0; c < months.length; c++) {
+          row.push(c === r ? sales[r] : null);
+        }
+        data.addRow(row);
+      }
 
       var options = {
         title: 'Monthly Sales in 2023',
         hAxis: { title: 'Month' },
         vAxis: { title: 'Sales (in GBP)', minValue: 0 },
+        colors: colours,
+        isStacked: true,
         legend: { position: 'none' }
       };
 
       new google.visualization.ColumnChart(document.getElementById('column_div')).draw(data, options);
-    }
-  </script>
-
-  <hr>
-
+   
   <!-- references -->
   <h3 id="References">References</h3>
   <p>
