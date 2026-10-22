@@ -204,11 +204,11 @@
   </math>
   </p>
 
-  <!-- charts (Google Charts) -->
+  <!-- charts (Google Charts) - all data comes from Table 1 above -->
   <div id="pie_div" style="width: 600px; height: 400px;"></div>
-  <div id="scatter_div" style="width: 600px; height: 400px;"></div>
-  <div id="bar_div" style="width: 600px; height: 400px;"></div>
-  <div id="line_div" style="width: 800px; height: 500px;"></div>
+  <div id="scatter_div" style="width: 700px; height: 400px;"></div>
+  <div id="bar_div" style="width: 700px; height: 350px;"></div>
+  <div id="line_div" style="width: 800px; height: 450px;"></div>
   <div id="column_div" style="width: 800px; height: 450px;"></div>
 
   <script type="text/javascript">
@@ -223,119 +223,122 @@
       drawColumnChart();
     }
 
+    // Pie chart: share of the flights in Table 1 flown before and after the V3 vehicle
     function drawPieChart() {
       var data = google.visualization.arrayToDataTable([
-        ['Task', 'Hours per Day'],
-        ['Work', 8],
-        ['Sleep', 8],
-        ['Eat', 2],
-        ['Study', 4],
-        ['Exercise', 2]
+        ['Vehicle generation', 'Flights'],
+        ['Before V3 (Flights 5-8)', 4],
+        ['V3 (Flights 12-14)', 3]
       ]);
       var options = {
-        title: 'My Daily Activities'
+        title: 'Starship Flights in Table 1 by Vehicle Generation'
       };
       new google.visualization.PieChart(document.getElementById('pie_div')).draw(data, options);
     }
 
+    // Scatter chart: when each flight happened (days after Flight 5 on 13 Oct 2024)
     function drawScatterChart() {
       var data = new google.visualization.DataTable();
-      data.addColumn('number', 'Age');
-      data.addColumn('number', 'Salary');
+      data.addColumn('number', 'Days since Flight 5');
+      data.addColumn('number', 'Flight number');
       data.addRows([
-        [25, 40000],
-        [30, 50000],
-        [35, 60000],
-        [40, 75000],
-        [45, 80000],
-        [50, 90000]
+        [0, 5],
+        [37, 6],
+        [95, 7],
+        [144, 8],
+        [586, 12],
+        [649, 13],
+        [715, 14]
       ]);
       var options = {
-        title: 'Age vs. Salary',
-        hAxis: { title: 'Age' },
-        vAxis: { title: 'Salary' }
+        title: 'Starship Flight Number vs Days Since Flight 5',
+        hAxis: { title: 'Days since Flight 5 (13 Oct 2024)' },
+        vAxis: { title: 'Flight number' },
+        legend: { position: 'none' }
       };
       new google.visualization.ScatterChart(document.getElementById('scatter_div')).draw(data, options);
     }
 
+    // Bar chart: number of flights from Table 1 in each year
     function drawBarChart() {
       var data = new google.visualization.DataTable();
-      data.addColumn('string', 'City');
-      data.addColumn('number', 'Population');
+      data.addColumn('string', 'Year');
+      data.addColumn('number', 'Flights');
       data.addRows([
-        ['London', 9648000],
-        ['Birmingham', 1153900],
-        ['Edinburgh', 554000]
+        ['2024', 2],
+        ['2025', 2],
+        ['2026', 3]
       ]);
       var options = {
-        title: 'City Populations in 2023',
-        hAxis: { title: 'Population' },
-        vAxis: { title: 'City' },
+        title: 'Starship Flights in Table 1 per Year',
+        hAxis: { title: 'Number of flights', minValue: 0 },
+        vAxis: { title: 'Year' },
         colors: ['#3366cc'],
         legend: { position: 'none' }
       };
       new google.visualization.BarChart(document.getElementById('bar_div')).draw(data, options);
     }
 
+    // Line chart: running total of flights and of successful booster catches
     function drawLineChart() {
       var data = new google.visualization.DataTable();
-      data.addColumn('number', 'Year');
-      data.addColumn('number', 'London');
-      data.addColumn('number', 'Birmingham');
-      data.addColumn('number', 'Edinburgh');
+      data.addColumn('string', 'Flight');
+      data.addColumn('number', 'Flights flown (cumulative)');
+      data.addColumn('number', 'Booster catches (cumulative)');
       data.addRows([
-        [2013, 8414000, 1092200, 495000],
-        [2015, 8661000, 1113000, 507000],
-        [2017, 8916000, 1137100, 519000],
-        [2019, 9177000, 1141800, 531000],
-        [2021, 9426000, 1142500, 543000],
-        [2023, 9648000, 1153900, 554000]
+        ['Flight 5',  1, 1],
+        ['Flight 6',  2, 1],
+        ['Flight 7',  3, 2],
+        ['Flight 8',  4, 3],
+        ['Flight 12', 5, 3],
+        ['Flight 13', 6, 3],
+        ['Flight 14', 7, 3]
       ]);
       var options = {
-        title: 'City Population Trends (2013-2023)',
-        hAxis: { title: 'Year', format: '####', ticks: [2013, 2015, 2017, 2019, 2021, 2023] },
-        vAxis: { title: 'Population' },
-        colors: ['#3366cc', '#dc3912', '#ff9900'],
-        curveType: 'function',
+        title: 'Cumulative Flights and Booster Catches (Table 1)',
+        hAxis: { title: 'Integrated flight test' },
+        vAxis: { title: 'Cumulative count', minValue: 0 },
+        colors: ['#3366cc', '#dc3912'],
         legend: { position: 'bottom' }
       };
       new google.visualization.LineChart(document.getElementById('line_div')).draw(data, options);
     }
 
-  function drawColumnChart() {
-      var months = ['January', 'February', 'March', 'April', 'May', 'June',
-                    'July', 'August', 'September', 'October', 'November', 'December'];
-      var sales  = [25000, 28000, 32000, 27000, 31000, 34000,
-                    38000, 36000, 31000, 29000, 27000, 32000];
-      var colours = ['#3366cc', '#dc3912', '#ff9900', '#109618', '#990099', '#0099c6',
-                     '#dd4477', '#66aa00', '#b82e2e', '#316395', '#994499', '#22aa99'];
+    // Column chart: Super Heavy booster outcomes, each column a different colour
+    function drawColumnChart() {
+      var outcomes = ['Caught by tower', 'Hard Gulf splashdown', 'Catch aborted, Gulf splashdown', 'Soft splashdown'];
+      var counts   = [3, 2, 1, 1];
+      var colours  = ['#109618', '#dc3912', '#ff9900', '#3366cc'];
 
-      // One series per month, each with a value only in its own row,
+      // One series per outcome, with a value only in its own row,
       // so every column gets its own colour.
       var data = new google.visualization.DataTable();
-      data.addColumn('string', 'Month');
-      for (var i = 0; i < months.length; i++) {
-        data.addColumn('number', months[i]);
+      data.addColumn('string', 'Booster outcome');
+      for (var i = 0; i < outcomes.length; i++) {
+        data.addColumn('number', outcomes[i]);
       }
-      for (var r = 0; r < months.length; r++) {
-        var row = [months[r]];
-        for (var c = 0; c < months.length; c++) {
-          row.push(c === r ? sales[r] : null);
+      for (var r = 0; r < outcomes.length; r++) {
+        var row = [outcomes[r]];
+        for (var c = 0; c < outcomes.length; c++) {
+          row.push(c === r ? counts[r] : null);
         }
         data.addRow(row);
       }
 
       var options = {
-        title: 'Monthly Sales in 2023',
-        hAxis: { title: 'Month' },
-        vAxis: { title: 'Sales (in GBP)', minValue: 0 },
+        title: 'Super Heavy Booster Outcomes (Table 1)',
+        hAxis: { title: 'Booster outcome' },
+        vAxis: { title: 'Number of flights', minValue: 0 },
         colors: colours,
         isStacked: true,
         legend: { position: 'none' }
       };
-
       new google.visualization.ColumnChart(document.getElementById('column_div')).draw(data, options);
-   
+    }
+  </script>
+
+  <hr>
+
   <!-- references -->
   <h3 id="References">References</h3>
   <p>
