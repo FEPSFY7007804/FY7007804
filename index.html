@@ -1,329 +1,366 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Evolution of Starship</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<style>
-  :root {
-    --bg: #f0ebf8;
-    --card: #ffffff;
-    --text: #202124;
-    --muted: #5f6368;
-    --border: #dadce0;
-    --accent: #673ab7;
-    --accent-soft: #ede7f6;
-    --blue: #4285f4;
-  }
-  [data-theme="dark"] {
-    --bg: #1e1b24;
-    --card: #2b2733;
-    --text: #e8eaed;
-    --muted: #b0b3b8;
-    --border: #3c3844;
-    --accent: #b39ddb;
-    --accent-soft: #3a3248;
-    --blue: #8ab4f8;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    font-family: 'Roboto', Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    transition: background 0.3s, color 0.3s;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ENG0018 Computer Laboratory 2026/27</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-  /* Top bar */
-  .topbar {
-    position: sticky; top: 0; z-index: 10;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 10px 20px;
-    background: var(--accent);
-    color: #fff;
-    font-weight: 500;
-  }
-  [data-theme="dark"] .topbar { background: #4a3780; }
-  .topbar .buttons { display: flex; gap: 8px; }
-  .btn {
-    font-family: inherit; font-size: 14px; font-weight: 500;
-    border: none; border-radius: 4px; padding: 8px 16px;
-    cursor: pointer;
-    background: #fff; color: #673ab7;
-  }
-  .btn:hover { opacity: 0.9; }
-  .btn.primary { background: var(--accent); color: #fff; }
-  [data-theme="dark"] .btn.primary { color: #1e1b24; }
+  <style>
+    /* make all writing bold (delete this rule if you want normal weight) */
+    body, h1, h2, p, td, th {
+      font-weight: bold;
+    }
 
-  /* Form-style layout */
-  .container { max-width: 770px; margin: 24px auto; padding: 0 16px; }
-  .card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 24px;
-    margin-bottom: 14px;
-    position: relative;
-  }
-  .card.header-card { border-top: 10px solid var(--accent); }
-  .card.section { border-left: 6px solid var(--blue); }
-  h1 { font-size: 32px; font-weight: 400; margin: 0 0 8px; }
-  h2 { font-size: 20px; font-weight: 500; margin: 0 0 12px; }
-  .subtitle { color: var(--muted); margin: 0; }
-  .label {
-    display: inline-block;
-    background: var(--accent-soft); color: var(--accent);
-    font-size: 12px; font-weight: 500;
-    padding: 2px 10px; border-radius: 12px; margin-bottom: 10px;
-  }
+    /* style for tables */
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 30%;
+    }
 
-  /* Timeline */
-  .timeline { list-style: none; padding: 0; margin: 0; }
-  .timeline li {
-    padding: 10px 0 10px 18px;
-    border-left: 2px solid var(--border);
-    position: relative;
-  }
-  .timeline li::before {
-    content: ""; position: absolute; left: -7px; top: 16px;
-    width: 12px; height: 12px; border-radius: 50%;
-    background: var(--accent);
-  }
-  .timeline strong { color: var(--accent); }
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
 
-  .chart-box { position: relative; height: 300px; }
-  video { width: 100%; border-radius: 6px; background: #000; }
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
 
-  /* Quiz (questionnaire style) */
-  .option {
-    display: flex; align-items: center; gap: 12px;
-    padding: 8px 0; cursor: pointer;
-  }
-  .option input { accent-color: var(--accent); width: 18px; height: 18px; }
-  #quiz-result { margin-top: 12px; font-weight: 500; }
+    /* indented paragraph */
+    p.ex1 {
+      margin-left: 250px;
+    }
 
-  .references li { margin-bottom: 8px; word-break: break-word; }
-  .references a { color: var(--blue); }
-  .center { text-align: center; }
-  footer { text-align: center; color: var(--muted); font-size: 13px; padding: 16px 0 32px; }
+    /* space background: dark sky with stars and a soft glow */
+    body {
+      margin: 0;
+      padding: 1px 15px;
+      background-color: #050a1f;
+      background-image:
+        radial-gradient(2px 2px at 20px 30px, #ffffff, transparent),
+        radial-gradient(1.5px 1.5px at 90px 80px, #ffffff, transparent),
+        radial-gradient(1px 1px at 160px 120px, #cfe3ff, transparent),
+        radial-gradient(2px 2px at 220px 40px, #ffffff, transparent),
+        radial-gradient(1px 1px at 300px 160px, #ffe9c4, transparent),
+        radial-gradient(ellipse at 15% 0%, #1b2a6b 0%, transparent 60%),
+        radial-gradient(ellipse at 90% 100%, #4a1d6b 0%, transparent 55%);
+      background-size: 320px 200px, 320px 200px, 320px 200px, 320px 200px, 320px 200px, auto, auto;
+      background-attachment: fixed;
+    }
 
-  @media print {
-    .topbar, .btn, video { display: none; }
-    body { background: #fff; }
-    .card { break-inside: avoid; }
-  }
-</style>
+    /* white panel so the text stays easy to read on the dark background */
+    .page {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 20px 30px;
+      background: rgba(255, 255, 255, 0.94);
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(120, 160, 255, 0.45);
+    }
+
+    /* let long lines in the paper wrap inside the panel */
+    pre {
+      white-space: pre-wrap;
+    }
+
+    /* hidden slides (used in a later worksheet) */
+    .mySlides {
+      display: none;
+    }
+  </style>
 </head>
+
 <body>
+<div class="page">
+  <img src="WebBanner2026.png" alt="Banner" width="900" height="300">
+  <h1>ENG0018 COMPUTER Laboratory 2026/27</h1>
+  <h2>Student URN: 7007804</h2>
+  <hr>
+  <h2 style="font-family:calibri;">Conference paper: Evolution of Starship (SpaceX)</h2>
+  <hr>
 
-<div class="topbar">
-  <span>ENG0018 | URN 6988760</span>
-  <div class="buttons">
-    <button class="btn" onclick="toggleTheme()">Light / Dark Mode</button>
-    <button class="btn" onclick="window.print()">Print</button>
-  </div>
+  <!-- contents links -->
+  <p>
+  Contents:
+  <a href="#Abstract">Abstract</a> |
+  <a href="#Introduction">Introduction</a> |
+  <a href="#Analysis-and-discussion">Analysis and discussion</a> |
+  <a href="#References">References</a>
+  </p>
+
+  <hr>
+
+  <!-- abstract -->
+  <p class="ex1">
+  <pre>
+  This paper reviews the evolution of Starship, SpaceX's fully reusable super heavy-lift launch system,
+  from its early concept to the integrated flight test programme. The development approach is
+  characterised by rapid hardware iteration, with vehicles built, flown and modified in short cycles,
+  compared with the longer design-then-build approach used in many traditional launch programmes.
+  We further consider the tower catches of the Super Heavy booster achieved since October 2024 and the
+  planned first tower catch of the Starship upper stage, and discuss their role in reducing launch costs
+  compared with expendable launch vehicles. Our results show that...We conclude that...
+  </pre>
+  <hr>
+  <h3 id="Abstract">Abstract</h3>
+  </p>
+
+  <!-- introduction -->
+  <p class="ex1">
+  <pre id="Introduction_InText">
+  Starship (SpaceX, 2024) is a two-stage launch system made up of the Super Heavy booster and the
+  Starship upper stage, both built from stainless steel and powered by Raptor engines that burn liquid
+  methane and liquid oxygen. The system is designed to be fully and rapidly reusable, with the long-term
+  aim of carrying crew and cargo to Earth orbit, the Moon and Mars. In 2021 NASA selected a Starship
+  variant as the Human Landing System for the Artemis programme (NASA, 2024), which gave the vehicle
+  a role in lunar exploration as well as in commercial launch. Unlike many earlier programmes,
+  development has been carried out through repeated integrated flight tests, in which each flight
+  provides data that is used to modify the next vehicle. The progress of these tests is discussed in
+  the next section.
+  </pre>
+  <hr>
+  <h3 id="Introduction">Introduction</h3>
+  </p>
+
+  <!-- analysis and discussion -->
+  <hr>
+  <h3 id="Analysis-and-discussion">Analysis and discussion</h3>
+  <p id="Analysis_InText1">
+  Starship development progress is the subject of much public documentation such as
+  <a href="https://www.spacex.com/vehicles/starship/">SpaceX (2024).</a>
+  The key reusability milestone came on Flight 5 on 13 October 2024, when the Super Heavy booster
+  returned to the launch site and was caught by the tower's "chopstick" arms, the first catch of an
+  orbital-class booster
+  (<a href="https://www.space.com/spacex-starship-flight-5-launch-super-heavy-booster-catch-success-video">Space.com, 2024</a>).
+  On Flight 6 the catch was aborted after a tower health check failed, so the booster splashed down in the
+  Gulf of Mexico instead. The catch was then repeated on Flight 7 (January 2025) and Flight 8 (March 2025),
+  giving three successful booster catches in four attempts
+  (<a href="https://nextspaceflight.com/starship/">Next Spaceflight, 2026</a>).
+  The programme later moved to the third-generation "V3" vehicle, first flown on Flight 12 in May 2026.
+  Flight 14 on 28 September 2026 was the first Starship flight to reach orbit, deploying 26 Starlink V3
+  satellites while the V3 booster made a soft splashdown
+  (<a href="https://www.cnbc.com/2026/09/28/spacex-prepares-to-send-starship-rocket-to-orbit-for-first-time.html">CNBC, 2026</a>).
+  </p>
+
+  <p id="Analysis_InText2">
+  The upper stage, called Ship, has never been caught. It returns from orbit much faster than the booster,
+  and every Ship so far has ended its flight with an ocean splashdown. SpaceX has announced that Flight 15,
+  targeted for November 2026, will attempt to catch both the Super Heavy booster and Ship 42 with the
+  tower arms at Starbase, which would be the first full recovery of an orbital launch vehicle
+  (<a href="https://www.engadget.com/2292685/heres-how-spacex-plans-to-catch-starships-upper-stage-for-the-first-time/">Engadget, 2026</a>).
+  Ship 42 has already been lifted into a simulated catch position on the tower, and SpaceX has described
+  success as more likely than not, although the exact date and regulatory approval were still being
+  finalised at the time of writing. If the attempt works, the next goals are to fly a recovered Ship a
+  second time and to complete an in-orbit propellant transfer demonstration, both planned for early 2027
+  (<a href="https://northeasttimes.com/2026/10/21/spacex-plans-to-catch-both-starship-stages-on-its-next-flight/">Northeast Times, 2026</a>).
+  </p>
+
+  <p>
+  Formatting some equations using MathML. The rocket equation links the change in velocity of a vehicle
+  to its exhaust velocity and the ratio of its initial and final mass:
+  <math xmlns="http://www.w3.org/1998/Math/MathML">
+    <mrow>
+      <mi>&#916;</mi><mi>v</mi>
+      <mo>=</mo>
+      <msub><mi>v</mi><mi>e</mi></msub>
+      <mo>&InvisibleTimes;</mo>
+      <mi>ln</mi>
+      <mo>&ApplyFunction;</mo>
+      <mfrac>
+        <msub><mi>m</mi><mn>0</mn></msub>
+        <msub><mi>m</mi><mi>f</mi></msub>
+      </mfrac>
+    </mrow>
+  </math>
+  </p>
+
+  <!-- charts (Google Charts) -->
+  <div id="pie_div" style="width: 600px; height: 400px;"></div>
+  <div id="line_div" style="width: 800px; height: 450px;"></div>
+  <div id="column_div" style="width: 800px; height: 450px;"></div>
+  <p>Source for the height comparison: Spaceflight Now (2023). Heights are for the original Starship configuration.</p>
+
+  <script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawCharts);
+
+    function drawCharts() {
+      drawPieChart();
+      drawLineChart();
+      drawColumnChart();
+    }
+
+    // Pie chart: Super Heavy booster catch attempts on Flights 5-8
+    // (three successful catches in four attempts)
+    function drawPieChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Outcome', 'Flights'],
+        ['Booster caught by tower', 3],
+        ['Catch aborted (Flight 6)', 1]
+      ]);
+      var options = {
+        title: 'Booster Catch Attempts on Flights 5-8',
+        colors: ['#109618', '#dc3912']
+      };
+      new google.visualization.PieChart(document.getElementById('pie_div')).draw(data, options);
+    }
+
+    // Line chart: programme timeline, days after Flight 5 (13 Oct 2024)
+    function drawLineChart() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Flight');
+      data.addColumn('number', 'Days since Flight 5');
+      data.addRows([
+        ['Flight 5',  0],
+        ['Flight 6',  37],
+        ['Flight 7',  95],
+        ['Flight 8',  144],
+        ['Flight 12', 586],
+        ['Flight 13', 649],
+        ['Flight 14', 715]
+      ]);
+      var options = {
+        title: 'Starship Programme Timeline Since the First Booster Catch',
+        hAxis: { title: 'Integrated flight test' },
+        vAxis: { title: 'Days since Flight 5 (13 Oct 2024)', minValue: 0 },
+        colors: ['#3366cc'],
+        pointSize: 6,
+        legend: { position: 'none' }
+      };
+      new google.visualization.LineChart(document.getElementById('line_div')).draw(data, options);
+    }
+
+    // Column chart: height of Starship compared with other heavy-lift rockets,
+    // each column a different colour
+    function drawColumnChart() {
+      var rockets = ['Starship', 'Saturn V', 'SLS'];
+      var heights = [120, 111, 98];                 // metres
+      var colours = ['#3366cc', '#ff9900', '#109618'];
+
+      // One series per rocket, with a value only in its own row,
+      // so every column gets its own colour.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Launch vehicle');
+      for (var i = 0; i < rockets.length; i++) {
+        data.addColumn('number', rockets[i]);
+      }
+      for (var r = 0; r < rockets.length; r++) {
+        var row = [rockets[r]];
+        for (var c = 0; c < rockets.length; c++) {
+          row.push(c === r ? heights[r] : null);
+        }
+        data.addRow(row);
+      }
+
+      var options = {
+        title: 'Launch Vehicle Height Comparison',
+        hAxis: { title: 'Launch vehicle' },
+        vAxis: { title: 'Height (metres)', minValue: 0 },
+        colors: colours,
+        isStacked: true,
+        legend: { position: 'none' }
+      };
+      new google.visualization.ColumnChart(document.getElementById('column_div')).draw(data, options);
+    }
+  </script>
+
+  <hr>
+
+  <!-- references -->
+  <h3 id="References">References</h3>
+  <p>
+  <pre>
+  CNBC (2026), SpaceX launches its massive Starship rocket into orbit for the first time.
+  Available at: https://www.cnbc.com/2026/09/28/spacex-prepares-to-send-starship-rocket-to-orbit-for-first-time.html
+
+  Engadget (2026), Here's how SpaceX plans to catch Starship's upper stage for the first time.
+  Available at: https://www.engadget.com/2292685/heres-how-spacex-plans-to-catch-starships-upper-stage-for-the-first-time/
+
+  NASA (2024), Artemis programme. Available at: https://www.nasa.gov/humans-in-space/artemis/
+
+  Next Spaceflight (2026), Starship. Available at: https://nextspaceflight.com/starship/
+
+  Northeast Times (2026), SpaceX Plans to Catch Both Starship Stages on Its Next Flight.
+  Available at: https://northeasttimes.com/2026/10/21/spacex-plans-to-catch-both-starship-stages-on-its-next-flight/
+
+  Space.com (2024), SpaceX catches giant Starship booster with 'Chopsticks' on historic Flight 5 rocket launch and landing.
+  Available at: https://www.space.com/spacex-starship-flight-5-launch-super-heavy-booster-catch-success-video
+
+  Spaceflight Now (2023), How SpaceX's Starship stacks up to other rockets.
+  Available at: https://spaceflightnow.com/2023/04/17/how-spacexs-starship-stacks-up-to-other-rockets/
+
+  SpaceX (2024), Starship. Available at: https://www.spacex.com/vehicles/starship/
+  </pre>
+  </p>
+
+  <!-- last modified time and word count -->
+  <div id="last-updated">Loading last update time...</div>
+  <button onclick="verifyLastUpdatedTime()" style="display: block; margin: 10px auto; padding: 8px 16px;">
+    Verify Last Modified Time
+  </button>
+
+  <p id="totalWordCount"></p>
+  <hr>
+
+  <script>
+    async function getLastUpdatedTime() {
+      const username = 'FEPSFY7007804';
+      const repo = 'FY7007804';
+
+      const url = `https://api.github.com/repos/${username}/${repo}/commits`;
+
+      try {
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: { 'Accept': 'application/vnd.github.v3+json' }
+        });
+        if (!response.ok) {
+          throw new Error(`Error fetching data: ${response.status} - ${response.statusText}`);
+        }
+        const commits = await response.json();
+        if (commits && commits.length > 0) {
+          const lastCommitDate = new Date(commits[0].commit.committer.date);
+          document.getElementById('last-updated').innerText =
+            `Last Modified Time: ${lastCommitDate.toLocaleString()}`;
+        } else {
+          document.getElementById('last-updated').innerText = 'No commits found in the repository.';
+        }
+      } catch (error) {
+        console.error('Error fetching the last updated time:', error);
+        document.getElementById('last-updated').innerText =
+          'Error fetching update time. Please check the repository details.';
+      }
+    }
+
+    async function verifyLastUpdatedTime() {
+      document.getElementById('last-updated').innerText = 'Verifying...';
+      await getLastUpdatedTime();
+      alert("Last modified time has been successfully verified from GitHub API.");
+    }
+
+    function displayWordCount(sectionId) {
+      const text = document.getElementById(sectionId).textContent;
+      return text.trim().split(/\s+/).filter(Boolean).length;
+    }
+
+    function displayTotalWordCount() {
+      const IntroductionCount = displayWordCount("Introduction_InText");
+      const Analysis1Count = displayWordCount("Analysis_InText1");
+      const Analysis2Count = displayWordCount("Analysis_InText2");
+
+      const totalWordCount = IntroductionCount + Analysis1Count + Analysis2Count;
+      document.getElementById("totalWordCount").innerText = `Total word count: ${totalWordCount}`;
+    }
+
+    window.addEventListener('load', function () {
+      getLastUpdatedTime();
+      displayTotalWordCount();
+    });
+  </script>
 </div>
-
-<div class="container">
-
-  <!-- Title card -->
-  <div class="card header-card">
-    <h1>The Evolution of Starship</h1>
-    <p class="subtitle">How SpaceX went from a water-tower-shaped test hopper to the largest and most powerful rocket ever flown, and why it matters for the Moon and Mars.</p>
-  </div>
-
-  <!-- Intro -->
-  <div class="card section">
-    <span class="label">Section 1</span>
-    <h2>What is Starship?</h2>
-    <p>Starship is a two-stage rocket built by SpaceX. The first stage, called <strong>Super Heavy</strong>, is a giant booster powered by 33 Raptor engines. The second stage, also called <strong>Starship</strong>, is the spacecraft that carries crew or cargo.</p>
-    <p>What makes it different from almost every rocket before it is that <strong>both stages are designed to be fully reusable</strong>. Most rockets are thrown away after one flight, which is like building a new aeroplane for every journey. If Starship can be reused like an aircraft, the cost of reaching space could fall dramatically.</p>
-  </div>
-
-  <!-- Timeline -->
-  <div class="card section">
-    <span class="label">Section 2</span>
-    <h2>Key milestones</h2>
-    <ul class="timeline">
-      <li><strong>2019 – Starhopper.</strong> A stubby test vehicle with a single Raptor engine made short hops of up to about 150 m at Boca Chica, Texas, proving the engine could lift and land a vehicle.</li>
-      <li><strong>December 2020 – SN8.</strong> The first high-altitude test of a full-size Starship prototype. It performed the famous "belly flop" manoeuvre but exploded on landing. SpaceX treated this as a success because it gathered huge amounts of data.</li>
-      <li><strong>May 2021 – SN15.</strong> After several more crashes, SN15 became the first prototype to fly to high altitude and land in one piece.</li>
-      <li><strong>April 2023 – Integrated Flight Test 1.</strong> The first launch of the full Super Heavy and Starship stack. It cleared the pad but tumbled and was destroyed a few minutes into flight.</li>
-      <li><strong>June 2024 – Flight 4.</strong> Both the booster and the ship made controlled splashdowns in the ocean for the first time.</li>
-      <li><strong>October 2024 – Flight 5.</strong> The Super Heavy booster flew back to the launch tower and was caught in mid-air by the tower's "chopstick" arms, a world first.</li>
-    </ul>
-  </div>
-
-  <!-- Chart 1 -->
-  <div class="card section">
-    <span class="label">Chart 1</span>
-    <h2>How big is Starship?</h2>
-    <p>Fully stacked, Starship stands taller than Saturn V, the rocket that took astronauts to the Moon, and taller than Big Ben's Elizabeth Tower.</p>
-    <div class="chart-box"><canvas id="heightChart"></canvas></div>
-  </div>
-
-  <!-- Chart 2 -->
-  <div class="card section">
-    <span class="label">Chart 2</span>
-    <h2>The Raptor engine keeps getting stronger</h2>
-    <p>Each new version of the Raptor engine produces more thrust while becoming simpler and lighter. Raptor 3 removes many external pipes and parts, making it easier to build and reuse.</p>
-    <div class="chart-box"><canvas id="raptorChart"></canvas></div>
-  </div>
-
-  <!-- Why it matters -->
-  <div class="card section">
-    <span class="label">Section 3</span>
-    <h2>Why it matters</h2>
-    <p><strong>Back to the Moon:</strong> NASA chose a version of Starship as the Human Landing System for its Artemis programme, which aims to land astronauts on the Moon for the first time since 1972.</p>
-    <p><strong>Mars:</strong> SpaceX's long-term goal is to use Starship to carry people and cargo to Mars. This depends on refuelling Starship in orbit, which is still being developed.</p>
-    <p><strong>Engineering approach:</strong> SpaceX uses rapid "build, fly, fail, fix" testing. Instead of years of design before a single flight, they fly prototypes early and learn from each failure.</p>
-  </div>
-
-  <!-- Video -->
-  <div class="card section">
-    <span class="label">Video</span>
-    <h2>Video</h2>
-    <!-- Replace video.mp4 with the file name of your own video -->
-    <video controls src="video.mp4"></video>
-  </div>
-
-  <!-- Quiz -->
-  <div class="card section">
-    <span class="label">Quick check</span>
-    <h2>Which flight first caught the Super Heavy booster with the launch tower?</h2>
-    <label class="option"><input type="radio" name="q1" value="wrong"> Flight 1 (April 2023)</label>
-    <label class="option"><input type="radio" name="q1" value="wrong"> Flight 4 (June 2024)</label>
-    <label class="option"><input type="radio" name="q1" value="right"> Flight 5 (October 2024)</label>
-    <label class="option"><input type="radio" name="q1" value="wrong"> SN15 (May 2021)</label>
-    <button class="btn primary" onclick="checkQuiz()">Submit</button>
-    <div id="quiz-result"></div>
-  </div>
-
-  <!-- References -->
-  <div class="card section">
-    <span class="label">References</span>
-    <h2>References</h2>
-    <ol class="references">
-      <li>SpaceX (n.d.) <em>Starship</em>. Available at: <a href="https://www.spacex.com/vehicles/starship/" target="_blank">https://www.spacex.com/vehicles/starship/</a></li>
-      <li>NASA (n.d.) <em>Artemis</em>. Available at: <a href="https://www.nasa.gov/humans-in-space/artemis/" target="_blank">https://www.nasa.gov/humans-in-space/artemis/</a></li>
-    </ol>
-  </div>
-
-  <!-- Last modified -->
-  <div class="card center">
-    <p id="last-modified">Last Modified Time: </p>
-    <button class="btn primary" onclick="verifyLastModified()">Verify Last Modified Time</button>
-    <p id="verify-result" class="subtitle"></p>
-  </div>
-
-</div>
-
-<footer>ENG0018 Computer Lab Coursework | URN 6988760</footer>
-
-<script>
-  // Light / dark mode
-  function toggleTheme() {
-    const html = document.documentElement;
-    const dark = html.getAttribute('data-theme') === 'dark';
-    html.setAttribute('data-theme', dark ? 'light' : 'dark');
-    try { localStorage.setItem('theme', dark ? 'light' : 'dark'); } catch (e) {}
-    drawCharts();
-  }
-  try {
-    if (localStorage.getItem('theme') === 'dark') {
-      document.documentElement.setAttribute('data-theme', 'dark');
-    }
-  } catch (e) {}
-
-  // Last modified time
-  document.getElementById('last-modified').textContent =
-    'Last Modified Time: ' + new Date(document.lastModified).toLocaleString();
-
-  function verifyLastModified() {
-    const out = document.getElementById('verify-result');
-    fetch(location.href, { method: 'HEAD', cache: 'no-store' })
-      .then(r => {
-        const h = r.headers.get('Last-Modified');
-        out.textContent = h
-          ? 'Server reports: ' + new Date(h).toLocaleString()
-          : 'Server did not return a Last-Modified header.';
-      })
-      .catch(() => { out.textContent = 'Could not reach the server to verify.'; });
-  }
-
-  // Quiz
-  function checkQuiz() {
-    const choice = document.querySelector('input[name="q1"]:checked');
-    const out = document.getElementById('quiz-result');
-    if (!choice) { out.textContent = 'Please choose an answer.'; return; }
-    out.textContent = choice.value === 'right'
-      ? 'Correct! Flight 5 in October 2024 was the first tower catch.'
-      : 'Not quite. It was Flight 5 in October 2024.';
-  }
-
-  // Charts
-  let heightChart, raptorChart;
-  function drawCharts() {
-    const styles = getComputedStyle(document.documentElement);
-    const text = styles.getPropertyValue('--text').trim();
-    const grid = styles.getPropertyValue('--border').trim();
-    const accent = styles.getPropertyValue('--accent').trim();
-    const blue = styles.getPropertyValue('--blue').trim();
-
-    Chart.defaults.font.family = 'Roboto, Arial, sans-serif';
-    Chart.defaults.color = text;
-
-    if (heightChart) heightChart.destroy();
-    if (raptorChart) raptorChart.destroy();
-
-    heightChart = new Chart(document.getElementById('heightChart'), {
-      type: 'bar',
-      data: {
-        labels: ['Falcon 9', 'Big Ben (Elizabeth Tower)', 'SLS Block 1', 'Saturn V', 'Starship (full stack)'],
-        datasets: [{
-          label: 'Height (m)',
-          data: [70, 96, 98, 111, 121],
-          backgroundColor: [blue, '#9aa0a6', blue, blue, accent],
-          borderRadius: 4
-        }]
-      },
-      options: {
-        maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: {
-          y: { beginAtZero: true, title: { display: true, text: 'Height (metres)' }, grid: { color: grid } },
-          x: { grid: { display: false } }
-        }
-      }
-    });
-
-    raptorChart = new Chart(document.getElementById('raptorChart'), {
-      type: 'line',
-      data: {
-        labels: ['Raptor 1', 'Raptor 2', 'Raptor 3'],
-        datasets: [{
-          label: 'Sea-level thrust (tonnes-force)',
-          data: [185, 230, 280],
-          borderColor: accent,
-          backgroundColor: accent,
-          tension: 0.3,
-          pointRadius: 6
-        }]
-      },
-      options: {
-        maintainAspectRatio: false,
-        scales: {
-          y: { beginAtZero: true, title: { display: true, text: 'Thrust (tonnes-force)' }, grid: { color: grid } },
-          x: { grid: { display: false } }
-        }
-      }
-    });
-  }
-  drawCharts();
-</script>
 </body>
 </html>
