@@ -35,38 +35,6 @@
       margin-left: 250px;
     }
 
-    /* space background: dark sky with stars and a soft glow */
-    body {
-      margin: 0;
-      padding: 1px 15px;
-      background-color: #050a1f;
-      background-image:
-        radial-gradient(2px 2px at 20px 30px, #ffffff, transparent),
-        radial-gradient(1.5px 1.5px at 90px 80px, #ffffff, transparent),
-        radial-gradient(1px 1px at 160px 120px, #cfe3ff, transparent),
-        radial-gradient(2px 2px at 220px 40px, #ffffff, transparent),
-        radial-gradient(1px 1px at 300px 160px, #ffe9c4, transparent),
-        radial-gradient(ellipse at 15% 0%, #1b2a6b 0%, transparent 60%),
-        radial-gradient(ellipse at 90% 100%, #4a1d6b 0%, transparent 55%);
-      background-size: 320px 200px, 320px 200px, 320px 200px, 320px 200px, 320px 200px, auto, auto;
-      background-attachment: fixed;
-    }
-
-    /* white panel so the text stays easy to read on the dark background */
-    .page {
-      max-width: 1000px;
-      margin: 30px auto;
-      padding: 20px 30px;
-      background: rgba(255, 255, 255, 0.94);
-      border-radius: 12px;
-      box-shadow: 0 0 30px rgba(120, 160, 255, 0.45);
-    }
-
-    /* let long lines in the paper wrap inside the panel */
-    pre {
-      white-space: pre-wrap;
-    }
-
     /* hidden slides (used in a later worksheet) */
     .mySlides {
       display: none;
@@ -74,8 +42,7 @@
   </style>
 </head>
 
-<body>
-<div class="page">
+<body style="background-color:#FFFFFF;margin-left:50px;">
   <img src="WebBanner2026.png" alt="Banner" width="900" height="300">
   <h1>ENG0018 COMPUTER Laboratory 2026/27</h1>
   <h2>Student URN: 7007804</h2>
@@ -83,13 +50,25 @@
   <h2 style="font-family:calibri;">Conference paper: Evolution of Starship (SpaceX)</h2>
   <hr>
 
-  <!-- contents links -->
-  <p>
-  Contents:
-  <a href="#Abstract">Abstract</a> |
-  <a href="#Introduction">Introduction</a> |
-  <a href="#Analysis-and-discussion">Analysis and discussion</a> |
-  <a href="#References">References</a>
+  <!-- table of contents -->
+  <p class="ex1">
+  <table>
+    <tr>
+      <th><h3>Table of contents</h3></th>
+    </tr>
+    <tr>
+      <td><a href="#Abstract">Abstract</a></td>
+    </tr>
+    <tr>
+      <td><a href="#Introduction">Introduction</a></td>
+    </tr>
+    <tr>
+      <td><a href="#Analysis-and-discussion">Analysis and discussion</a></td>
+    </tr>
+    <tr>
+      <td><a href="#References">References</a></td>
+    </tr>
+  </table>
   </p>
 
   <hr>
@@ -146,6 +125,53 @@
   (<a href="https://www.cnbc.com/2026/09/28/spacex-prepares-to-send-starship-rocket-to-orbit-for-first-time.html">CNBC, 2026</a>).
   </p>
 
+  <p>
+  Table 1: Super Heavy booster outcomes on selected Starship integrated flight tests
+  </p>
+
+  <table>
+    <tr>
+      <th>Integrated flight test</th>
+      <th>Date</th>
+      <th>Booster outcome</th>
+    </tr>
+    <tr>
+      <td>Flight 5</td>
+      <td>13 Oct 2024</td>
+      <td>Caught by tower (first catch)</td>
+    </tr>
+    <tr>
+      <td>Flight 6</td>
+      <td>19 Nov 2024</td>
+      <td>Catch aborted, Gulf splashdown</td>
+    </tr>
+    <tr>
+      <td>Flight 7</td>
+      <td>16 Jan 2025</td>
+      <td>Caught by tower</td>
+    </tr>
+    <tr>
+      <td>Flight 8</td>
+      <td>6 Mar 2025</td>
+      <td>Caught by tower</td>
+    </tr>
+    <tr>
+      <td>Flight 12</td>
+      <td>22 May 2026</td>
+      <td>Hard Gulf splashdown (first V3)</td>
+    </tr>
+    <tr>
+      <td>Flight 13</td>
+      <td>24 Jul 2026</td>
+      <td>Hard Gulf splashdown</td>
+    </tr>
+    <tr>
+      <td>Flight 14</td>
+      <td>28 Sep 2026</td>
+      <td>Soft splashdown</td>
+    </tr>
+  </table>
+
   <p id="Analysis_InText2">
   The upper stage, called Ship, has never been caught. It returns from orbit much faster than the booster,
   and every Ship so far has ended its flight with an ocean splashdown. SpaceX has announced that Flight 15,
@@ -178,11 +204,12 @@
   </math>
   </p>
 
-  <!-- charts (Google Charts) -->
+  <!-- charts (Google Charts) - all data comes from Table 1 above -->
   <div id="pie_div" style="width: 600px; height: 400px;"></div>
+  <div id="scatter_div" style="width: 700px; height: 400px;"></div>
+  <div id="bar_div" style="width: 700px; height: 350px;"></div>
   <div id="line_div" style="width: 800px; height: 450px;"></div>
   <div id="column_div" style="width: 800px; height: 450px;"></div>
-  <p>Source for the height comparison: Spaceflight Now (2023). Heights are for the original Starship configuration.</p>
 
   <script type="text/javascript">
     google.charts.load('current', { 'packages': ['corechart'] });
@@ -190,76 +217,118 @@
 
     function drawCharts() {
       drawPieChart();
+      drawScatterChart();
+      drawBarChart();
       drawLineChart();
       drawColumnChart();
     }
 
-    // Pie chart: Super Heavy booster catch attempts on Flights 5-8
-    // (three successful catches in four attempts)
+    // Pie chart: share of the flights in Table 1 flown before and after the V3 vehicle
     function drawPieChart() {
       var data = google.visualization.arrayToDataTable([
-        ['Outcome', 'Flights'],
-        ['Booster caught by tower', 3],
-        ['Catch aborted (Flight 6)', 1]
+        ['Vehicle generation', 'Flights'],
+        ['Before V3 (Flights 5-8)', 4],
+        ['V3 (Flights 12-14)', 3]
       ]);
       var options = {
-        title: 'Booster Catch Attempts on Flights 5-8',
-        colors: ['#109618', '#dc3912']
+        title: 'Starship Flights in Table 1 by Vehicle Generation'
       };
       new google.visualization.PieChart(document.getElementById('pie_div')).draw(data, options);
     }
 
-    // Line chart: programme timeline, days after Flight 5 (13 Oct 2024)
+    // Scatter chart: when each flight happened (days after Flight 5 on 13 Oct 2024)
+    function drawScatterChart() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'Days since Flight 5');
+      data.addColumn('number', 'Flight number');
+      data.addRows([
+        [0, 5],
+        [37, 6],
+        [95, 7],
+        [144, 8],
+        [586, 12],
+        [649, 13],
+        [715, 14]
+      ]);
+      var options = {
+        title: 'Starship Flight Number vs Days Since Flight 5',
+        hAxis: { title: 'Days since Flight 5 (13 Oct 2024)' },
+        vAxis: { title: 'Flight number' },
+        legend: { position: 'none' }
+      };
+      new google.visualization.ScatterChart(document.getElementById('scatter_div')).draw(data, options);
+    }
+
+    // Bar chart: number of flights from Table 1 in each year
+    function drawBarChart() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Year');
+      data.addColumn('number', 'Flights');
+      data.addRows([
+        ['2024', 2],
+        ['2025', 2],
+        ['2026', 3]
+      ]);
+      var options = {
+        title: 'Starship Flights in Table 1 per Year',
+        hAxis: { title: 'Number of flights', minValue: 0 },
+        vAxis: { title: 'Year' },
+        colors: ['#3366cc'],
+        legend: { position: 'none' }
+      };
+      new google.visualization.BarChart(document.getElementById('bar_div')).draw(data, options);
+    }
+
+    // Line chart: running total of flights and of successful booster catches
     function drawLineChart() {
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Flight');
-      data.addColumn('number', 'Days since Flight 5');
+      data.addColumn('number', 'Flights flown (cumulative)');
+      data.addColumn('number', 'Booster catches (cumulative)');
       data.addRows([
-        ['Flight 5',  0],
-        ['Flight 6',  37],
-        ['Flight 7',  95],
-        ['Flight 8',  144],
-        ['Flight 12', 586],
-        ['Flight 13', 649],
-        ['Flight 14', 715]
+        ['Flight 5',  1, 1],
+        ['Flight 6',  2, 1],
+        ['Flight 7',  3, 2],
+        ['Flight 8',  4, 3],
+        ['Flight 12', 5, 3],
+        ['Flight 13', 6, 3],
+        ['Flight 14', 7, 3]
       ]);
       var options = {
-        title: 'Starship Programme Timeline Since the First Booster Catch',
+        title: 'Cumulative Flights and Booster Catches (Table 1)',
         hAxis: { title: 'Integrated flight test' },
-        vAxis: { title: 'Days since Flight 5 (13 Oct 2024)', minValue: 0 },
-        colors: ['#3366cc'],
-        pointSize: 6,
-        legend: { position: 'none' }
+        vAxis: { title: 'Cumulative count', minValue: 0 },
+        colors: ['#3366cc', '#dc3912'],
+        legend: { position: 'bottom' }
       };
       new google.visualization.LineChart(document.getElementById('line_div')).draw(data, options);
     }
 
-    // Column chart: height of Starship compared with other heavy-lift rockets,
-    // each column a different colour
+    // Column chart: Super Heavy booster outcomes, each column a different colour
     function drawColumnChart() {
-      var rockets = ['Starship', 'Saturn V', 'SLS'];
-      var heights = [120, 111, 98];                 // metres
-      var colours = ['#3366cc', '#ff9900', '#109618'];
+      var outcomes = ['Caught by tower', 'Hard Gulf splashdown', 'Catch aborted, Gulf splashdown', 'Soft splashdown'];
+      var counts   = [3, 2, 1, 1];
+      var colours  = ['#109618', '#dc3912', '#ff9900', '#3366cc'];
 
-      // One series per rocket, with a value only in its own row,
+      // One series per outcome, with a value only in its own row,
       // so every column gets its own colour.
       var data = new google.visualization.DataTable();
-      data.addColumn('string', 'Launch vehicle');
-      for (var i = 0; i < rockets.length; i++) {
-        data.addColumn('number', rockets[i]);
+      data.addColumn('string', 'Booster outcome');
+      for (var i = 0; i < outcomes.length; i++) {
+        data.addColumn('number', outcomes[i]);
       }
-      for (var r = 0; r < rockets.length; r++) {
-        var row = [rockets[r]];
-        for (var c = 0; c < rockets.length; c++) {
-          row.push(c === r ? heights[r] : null);
+      for (var r = 0; r < outcomes.length; r++) {
+        var row = [outcomes[r]];
+        for (var c = 0; c < outcomes.length; c++) {
+          row.push(c === r ? counts[r] : null);
         }
         data.addRow(row);
       }
 
       var options = {
-        title: 'Launch Vehicle Height Comparison',
-        hAxis: { title: 'Launch vehicle' },
-        vAxis: { title: 'Height (metres)', minValue: 0 },
+        title: 'Super Heavy Booster Outcomes (Table 1)',
+        hAxis: { title: 'Booster outcome' },
+        vAxis: { title: 'Number of flights', minValue: 0 },
         colors: colours,
         isStacked: true,
         legend: { position: 'none' }
@@ -289,9 +358,6 @@
 
   Space.com (2024), SpaceX catches giant Starship booster with 'Chopsticks' on historic Flight 5 rocket launch and landing.
   Available at: https://www.space.com/spacex-starship-flight-5-launch-super-heavy-booster-catch-success-video
-
-  Spaceflight Now (2023), How SpaceX's Starship stacks up to other rockets.
-  Available at: https://spaceflightnow.com/2023/04/17/how-spacexs-starship-stacks-up-to-other-rockets/
 
   SpaceX (2024), Starship. Available at: https://www.spacex.com/vehicles/starship/
   </pre>
@@ -361,6 +427,5 @@
       displayTotalWordCount();
     });
   </script>
-</div>
 </body>
 </html>
